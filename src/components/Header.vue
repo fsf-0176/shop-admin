@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <el-col class="logo" :xs="8" :sm="6" :md="4" :lg="5" :xl="3">
+    <el-col class="logo" :xs="8" :sm="6" :md="4" :lg="3" :xl="3">
       <img src="../assets/logo.png" alt="" />
       天青色等烟雨
     </el-col>

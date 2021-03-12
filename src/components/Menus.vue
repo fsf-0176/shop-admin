@@ -1,5 +1,5 @@
 <template>
-  <el-col class="menus" :xs="8" :sm="6" :md="4" :lg="5" :xl="3">
+  <el-col class="menus" :xs="8" :sm="6" :md="4" :lg="3" :xl="3">
     <ul>
       <li>
         <a href="javascript:;">
