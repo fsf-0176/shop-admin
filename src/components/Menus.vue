@@ -2,41 +2,41 @@
   <el-col class="menus" :xs="8" :sm="6" :md="4" :lg="3" :xl="3">
     <ul>
       <li>
-        <a href="javascript:;">
+        <router-link to="/">
           <i class="el-icon-s-home"></i>
           后台主页
           <i class="el-icon-arrow-right right"></i>
-        </a>
+        </router-link>
       </li>
       <li class="active">
         <a href="javascript:;">
           <i class="el-icon-s-home"></i>
-          后台主页
+          订单列表
           <i class="el-icon-arrow-right right active"></i>
         </a>
       </li>
       <li>
         <a href="javascript:;">
           <i class="el-icon-s-home"></i>
-          后台主页
+          商品管理
         </a>
+      </li>
+      <li>
+        <router-link to="/trolley">
+          <i class="el-icon-s-home"></i>
+          购物车
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/user">
+          <i class="el-icon-s-home"></i>
+          用户列表
+        </router-link>
       </li>
       <li>
         <a href="javascript:;">
           <i class="el-icon-s-home"></i>
-          后台主页
-        </a>
-      </li>
-      <li>
-        <a href="javascript:;">
-          <i class="el-icon-s-home"></i>
-          后台主页
-        </a>
-      </li>
-      <li>
-        <a href="javascript:;">
-          <i class="el-icon-s-home"></i>
-          后台主页
+          店铺设置
         </a>
       </li>
       <li>
