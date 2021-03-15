@@ -20,12 +20,12 @@
         </template>
       </el-table-column>
       <el-table-column prop="nickname" label="昵称"> </el-table-column>
-      <el-table-column prop="pid" label="性别"> </el-table-column>
+      <el-table-column prop="pid" label="性别" width="65"> </el-table-column>
       <el-table-column prop="date" label="加入时间"> </el-table-column>
       <el-table-column prop="date" label="最近登录"> </el-table-column>
       <el-table-column prop="delete" label="操作">
         <template slot-scope="scope">
-          <el-button>编辑 {{scope.row.id}}</el-button>
+          <el-button>编辑 {{ scope.row.id }}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -85,7 +85,7 @@ export default {
     }
   }
   img {
-      max-width: 100%;
+    max-width: 100%;
     width: 70px;
   }
   .page {
