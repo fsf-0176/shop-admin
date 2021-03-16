@@ -36,15 +36,14 @@
         <router-link to="#">
           <i class="el-icon-s-home"></i>
           店铺设置
-          <ol>
-            <router-link to="/show-setting" tag="li"> 显示设置 </router-link>
-            <router-link to="/show-settinge" tag="li"> 广告设置 </router-link>
-            <router-link to="/show-setting3" tag="li"> 运费模板 </router-link>
-            <router-link to="/show-setting2" tag="li"> 快递设置 </router-link>
-            <router-link to="/show-setting1" tag="li"> 管理员 </router-link>
-          </ol>
           <i class="el-icon-arrow-right right"></i>
         </router-link>
+        <ol>
+          <router-link to="/show-setting" tag="li"> 显示设置 </router-link>
+          <router-link to="/ad-setting" tag="li"> 广告设置 </router-link>
+          <router-link to="/notice-setting" tag="li"> 公告管理 </router-link>
+          <router-link to="/admin-setting" tag="li"> 管理员 </router-link>
+        </ol>
       </li>
       <li>
         <a href="javascript:;">
@@ -95,23 +94,24 @@
         display: block;
         padding: 0 20px;
         line-height: 60px;
-        & > ol {
-          li {
-            position: relative;
-            padding-left: 40px;
-            color: #303133;
-            line-height: 40px;
-          }
-          li::before {
-            content: '●';
-            color: #909399;
-            font-size: 25px;
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            line-height: 0;
-            transform: translateY(-50%);
-          }
+      }
+      & > ol {
+        padding-left: 25px;
+        li {
+          position: relative;
+          padding-left: 40px;
+          color: #303133;
+          line-height: 40px;
+        }
+        li::before {
+          content: '●';
+          color: #909399;
+          font-size: 25px;
+          position: absolute;
+          left: 15px;
+          top: 50%;
+          line-height: 0;
+          transform: translateY(-50%);
         }
       }
     }
@@ -124,10 +124,10 @@
       //   }
       // }
     }
-    & > li.active {
+    & > li > a.active {
       .status();
     }
-    & > li:hover {
+    & > li > a:hover {
       .status();
     }
   }

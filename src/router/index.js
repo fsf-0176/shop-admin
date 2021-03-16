@@ -24,6 +24,21 @@ const routes = [
     path: '/show-setting',
     name: 'ShowSetting',
     component: () => import('../views/setting/ShowSetting.vue')
+  },
+  {
+    path: '/ad-setting',
+    name: 'AdSetting',
+    component: () => import('../views/setting/AdSetting.vue')
+  },
+  {
+    path: '/notice-setting',
+    name: 'NoticeSetting',
+    component: () => import('../views/setting/NoticeSetting.vue')
+  },
+  {
+    path: '/admin-setting',
+    name: 'AdminSetting',
+    component: () => import('../views/setting/AdminSetting.vue')
   }
 ]
 
