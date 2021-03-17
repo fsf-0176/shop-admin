@@ -19,6 +19,10 @@
           <i class="el-icon-s-home"></i>
           商品管理
         </a>
+        <ol>
+          <li><router-link to="/product-list"> 商品列表</router-link></li>
+          <li><router-link to="/product-setting"> 商品设置</router-link></li>
+        </ol>
       </li>
       <li>
         <router-link to="/trolley">
@@ -39,10 +43,18 @@
           <i class="el-icon-arrow-right right"></i>
         </router-link>
         <ol>
-          <router-link to="/show-setting" tag="li"> 显示设置 </router-link>
-          <router-link to="/ad-setting" tag="li"> 广告设置 </router-link>
-          <router-link to="/notice-setting" tag="li"> 公告管理 </router-link>
-          <router-link to="/admin-setting" tag="li"> 管理员 </router-link>
+          <router-link to="/show-setting" tag="li">
+            <a href="#">显示设置</a>
+          </router-link>
+          <router-link to="/ad-setting" tag="li">
+            <a href="#">广告设置</a>
+          </router-link>
+          <router-link to="/notice-setting" tag="li">
+            <a href="#">公告管理</a>
+          </router-link>
+          <router-link to="/admin-setting" tag="li">
+            <a href="#">管理员</a>
+          </router-link>
         </ol>
       </li>
       <li>
@@ -102,6 +114,9 @@
           padding-left: 40px;
           color: #303133;
           line-height: 40px;
+          a {
+            padding: 0;
+          }
         }
         li::before {
           content: '●';
