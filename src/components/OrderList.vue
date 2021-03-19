@@ -78,6 +78,7 @@ export default {
 .orderList {
   width: 100%;
   border: 1px solid #e7e7e7;
+  margin-top: 15px ;
   .detail{
     width: 15%;
     a{

@@ -18,12 +18,27 @@
         </el-input>
         <el-button type="primary">查询</el-button>
       </div>
-      <el-tab-pane label="用户管理" name="first">
+      <el-tab-pane label="待付款" name="first">
+        <order-list />
+        <order-list />
         <order-list />
       </el-tab-pane>
-      <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-      <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+      <el-tab-pane label="待发货" name="second">
+        <order-list />
+        <order-list />
+      </el-tab-pane>
+      <el-tab-pane label="待收货" name="third">
+        <order-list />
+      </el-tab-pane>
+      <el-tab-pane label="已收货" name="fourth">
+        <order-list />
+      </el-tab-pane>
+      <el-tab-pane label="已关闭" name="fifth">
+        <order-list />
+      </el-tab-pane>
+      <el-tab-pane label="全部订单" name="sixth">
+        <order-list />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
