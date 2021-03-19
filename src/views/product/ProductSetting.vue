@@ -57,7 +57,7 @@
   padding: 15px;
   background: white;
 }
-.btn{
+.btn {
   margin-bottom: 15px;
 }
 </style>

@@ -8,11 +8,11 @@
         </router-link>
       </li>
       <li>
-        <a href="javascript:;">
+        <router-link to="/order">
           <i class="el-icon-s-home"></i>
           订单列表
           <i class="el-icon-arrow-right right active"></i>
-        </a>
+        </router-link>
       </li>
       <li>
         <a href="javascript:;">

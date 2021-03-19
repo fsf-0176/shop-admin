@@ -49,6 +49,11 @@ const routes = [
     path: '/product-setting',
     name: 'ProductSetting',
     component: () => import('../views/product/ProductSetting.vue')
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: () => import('../views/order/Order.vue')
   }
 ]
 
