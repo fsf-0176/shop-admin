@@ -1,7 +1,7 @@
 <template>
-  <el-col class="menus" :xs="8" :sm="6" :md="4" :lg="3" :xl="3">
-    <ul>
-      <li>
+  <el-col ref="parent" class="menus" :xs="8" :sm="6" :md="4" :lg="3" :xl="3">
+    <ul ref="menus">
+      <li class="aaa">
         <router-link to="/">
           <i class="el-icon-s-home"></i>
           后台主页
@@ -11,13 +11,13 @@
         <router-link to="/order">
           <i class="el-icon-s-home"></i>
           订单列表
-          <i class="el-icon-arrow-right right active"></i>
         </router-link>
       </li>
       <li>
         <a href="javascript:;">
           <i class="el-icon-s-home"></i>
           商品管理
+          <i class="el-icon-arrow-right right active"></i>
         </a>
         <ol>
           <li><router-link to="/product-list"> 商品列表</router-link></li>
@@ -37,11 +37,11 @@
         </router-link>
       </li>
       <li>
-        <router-link to="#">
+        <a href="#">
           <i class="el-icon-s-home"></i>
           店铺设置
           <i class="el-icon-arrow-right right"></i>
-        </router-link>
+        </a>
         <ol>
           <router-link to="/show-setting" tag="li">
             <a href="#">显示设置</a>
@@ -66,15 +66,37 @@
     </ul>
   </el-col>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      status: 0
+    }
+  },
+  mounted() {
+    const ul = this.$refs.menus.children
+    ul.forEach((element) => {
+      element.onclick = () => {
+        ul.forEach((els) => {
+          els.classList.remove('active')
+        })
+        element.classList.add('active')
+      }
+    })
+    // const parent = this.$refs.parent
+  }
+}
+</script>
 
 <style lang="less" scoped>
 @import url('../assets/css/colors.less');
 .menus {
-  height: calc(100% - 60px);
+  height: calc(100vh - 60px);
   background: @menus;
   position: fixed;
   top: 60px;
   left: 0;
+  overflow: hidden;
   .router-link-exact-active.router-link-active {
     color: #409eff;
     i {
@@ -109,6 +131,8 @@
       }
       & > ol {
         padding-left: 25px;
+        height: 0;
+        overflow: hidden;
         li {
           position: relative;
           padding-left: 40px;
@@ -130,6 +154,15 @@
         }
       }
     }
+
+    & > li.active {
+      ol {
+        height: 100%;
+      }
+      i.right {
+        transform: rotate(90deg);
+      }
+    }
     .status {
       background: @menuHover;
       // a {
@@ -138,6 +171,9 @@
       //     color: @menus;
       //   }
       // }
+    }
+    ol > li:hover {
+      .status();
     }
     & > li > a.active {
       .status();
