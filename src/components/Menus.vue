@@ -58,10 +58,10 @@
         </ol>
       </li>
       <li>
-        <a href="javascript:;">
+        <router-link to="/login">
           <i class="el-icon-switch-button"></i>
           退出登录
-        </a>
+        </router-link>
       </li>
     </ul>
   </el-col>
