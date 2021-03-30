@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+import { login } from '../../api'
 export default {
   name: 'Login',
   data() {
@@ -24,6 +25,10 @@ export default {
       password: '',
       circleUrl: require('@/assets/logo.png')
     }
+  },
+  async created() {
+    const result = await login({ username: 'admin', password: 'admin' })
+    console.log(result)
   }
 }
 </script>

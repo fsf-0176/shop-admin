@@ -13,10 +13,19 @@ axios.interceptors.request.use(configs => {
   }
   return configs
 })
-axios.interceptors.response.use(response => {
-  return response
-},
+axios.interceptors.response.use(
+  response => {
+    return response
+  },
   error => {
-    alert('出错了')
+    alert(error)
   }
 )
+
+export const login = data => {
+  return axios({
+    method: 'post',
+    url: 'api/admin/login',
+    data
+  })
+}
