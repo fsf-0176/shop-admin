@@ -11,7 +11,7 @@ export default {
   name: 'App',
   data() {
     return {
-      page: ''
+      page: 'index'
     }
   },
   watch: {

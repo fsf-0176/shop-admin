@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import { login } from '../../api'
+// import { login } from '../../api'
 export default {
   name: 'Login',
   data() {
@@ -26,9 +26,20 @@ export default {
       circleUrl: require('@/assets/logo.png')
     }
   },
-  async created() {
-    const result = await login({ username: 'admin', password: 'admin' })
-    console.log(result)
+  created() {
+    const result = this.$store.dispatch('index/login', {
+      username: 'admin',
+      password: 'admin'
+    })
+    result.then((res) => {
+      const { token, result } = res.data
+      if (token) {
+        localStorage.setItem('auth', 'Bearer ' + token)
+      }
+      if (result.id > 0) {
+        alert('登录成功')
+      }
+    })
   }
 }
 </script>

@@ -1,12 +1,12 @@
 const axios = require('axios')
-
-axios.default.baseUrl = process.env.VUE_APP_SERVER_API_PATH
+axios.defaults.baseURL = process.env.VUE_APP_SERVER_API_PATH + process.env.VUE_APP_API_PATH
+console.log(process.env)
 // 请求发送前
 axios.interceptors.request.use(configs => {
   try {
-    const data = JSON.parse(localStorage.getItem('user'))
-    if (data.authorization) {
-      configs.headers.common.authorization = data.authorization
+    const authorization = localStorage.getItem('auth')
+    if (authorization) {
+      configs.headers.common.authorization = authorization
     }
   } catch (error) {
 
@@ -25,7 +25,7 @@ axios.interceptors.response.use(
 export const login = data => {
   return axios({
     method: 'post',
-    url: 'api/admin/login',
+    url: 'admin/login',
     data
   })
 }
