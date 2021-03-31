@@ -37,7 +37,7 @@ export default {
         localStorage.setItem('auth', 'Bearer ' + token)
       }
       if (result.id > 0) {
-        alert('登录成功')
+        // alert('登录成功')
       }
     })
   }
