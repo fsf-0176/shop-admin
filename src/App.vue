@@ -1,6 +1,5 @@
 <template>
-  <router-view v-if="page != 'Login' || page != 'Register'" />
-  <wrap v-else>
+  <wrap>
     <router-view />
   </wrap>
 </template>
@@ -8,16 +7,6 @@
 import Wrap from './components/Wrap'
 export default {
   components: { Wrap },
-  name: 'App',
-  data() {
-    return {
-      page: 'index'
-    }
-  },
-  watch: {
-    $route(val) {
-      this.page = val.name
-    }
-  }
+  name: 'App'
 }
 </script>
