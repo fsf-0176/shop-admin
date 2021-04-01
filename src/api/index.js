@@ -1,6 +1,5 @@
 const axios = require('axios')
 axios.defaults.baseURL = process.env.VUE_APP_SERVER_API_PATH + process.env.VUE_APP_API_PATH
-console.log(process.env)
 // 请求发送前
 axios.interceptors.request.use(configs => {
   try {
@@ -25,7 +24,14 @@ axios.interceptors.response.use(
 export const login = data => {
   return axios({
     method: 'post',
-    url: 'admin/login',
+    url: '/admin/login',
     data
+  })
+}
+
+export const users = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/user'
   })
 }

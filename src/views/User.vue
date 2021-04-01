@@ -7,22 +7,27 @@
     </div>
 
     <el-table
-      :data="tableData"
+      v-if="users"
+      :data="users"
       height="calc(80% - 90px)"
       border
       style="width: 100%"
       stripe
     >
       <el-table-column prop="id" label="ID" width="65"> </el-table-column>
-      <el-table-column prop="picture" label="头像">
+      <el-table-column prop="avatar" label="头像">
         <template slot-scope="scope">
-          <img :src="scope.row.picture" alt="" />
+          <img :src="scope.row.avatar" alt="" />
         </template>
       </el-table-column>
       <el-table-column prop="nickname" label="昵称"> </el-table-column>
-      <el-table-column prop="pid" label="性别" width="65"> </el-table-column>
-      <el-table-column prop="date" label="加入时间"> </el-table-column>
-      <el-table-column prop="date" label="最近登录"> </el-table-column>
+      <el-table-column prop="gender" label="性别" width="65">
+        <template slot-scope="scope">
+          {{scope.row.gender === 1 ? '男' : '女'}}
+        </template>
+      </el-table-column>
+      <el-table-column prop="register_time" label="加入时间"> </el-table-column>
+      <el-table-column prop="last_login_time" label="最近登录"> </el-table-column>
       <el-table-column prop="delete" label="操作">
         <template slot-scope="scope">
           <el-button>编辑 {{ scope.row.id }}</el-button>
@@ -41,31 +46,40 @@
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Trolley',
   data() {
     return {
       tableData: [],
-      input: ''
+      input: '',
+      users: []
     }
   },
+  computed: {
+    ...mapState('index', {
+      list: (status) => status.users
+    })
+  },
+  methods: {
+    ...mapMutations('index', {
+      setUsers: 'users'
+    })
+  },
   created() {
-    const img =
-      'http://yanxuan.nosdn.127.net/03c73e1f1ce1d2365e83b3230e507030.png'
-    for (let i = 0; i < 20; i++) {
-      this.tableData.push({
-        id: i + 1,
-        uid: i + 1,
-        pid: i + 1,
-        nickname: '名字' + 1,
-        picture: img,
-        name: '房型封闭式凉感条纹宠物窝',
-        model: '1米*1米',
-        number: 1,
-        money: 89.9,
-        date: '2021-03-13 15:29:14',
-        delete: i % 2
-      })
+    const { query } = this.$route
+    const cache = localStorage.getItem(`users-p${query.page || 1}`)
+    if (this.users.length === 0) {
+      if (!cache) {
+        this.$store.dispatch('index/users').then((res) => {
+          localStorage.setItem('users-p1', JSON.stringify(res.data))
+          this.users = this.list
+        })
+      } else {
+        // 直接从缓存获取，不需要存store
+        this.users = JSON.parse(cache)
+        console.log(this.users)
+      }
     }
   }
 }
