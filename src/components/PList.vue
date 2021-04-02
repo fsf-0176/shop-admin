@@ -13,17 +13,26 @@
             prop="goods_name"
             label="快递单上的简称"
             width="220"
-          ></el-table-column>
+          >
+           <template slot-scope="p">
+             {{p.row.goods_name?p.row.goods_name:'暂无'}}
+           </template>
+          </el-table-column>
           <el-table-column
             prop="value"
             label="型号/规格"
             width="150"
-          ></el-table-column>
+          >
+            <template slot-scope="p">
+             {{p.row.value?p.row.value:'暂无'}}
+           </template>
+          </el-table-column>
           <el-table-column
             prop="cost"
             label="成本（元）"
             width="110"
-          ></el-table-column>
+          >
+          </el-table-column>
           <el-table-column
             prop="retail_price"
             label="零售（元）"

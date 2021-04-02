@@ -4,25 +4,25 @@
       <el-tab-pane label="用户管理" name="first">
         <el-button class="btn" type="primary">添加分类</el-button>
         <el-table :data="userData" border style="width: 100%">
-          <el-table-column prop="type" label="分类名称"> </el-table-column>
-          <el-table-column prop="icon" label="图标显示" width="80">
+          <el-table-column prop="name" label="分类名称"> </el-table-column>
+          <el-table-column prop="is_category" label="图标显示" width="80">
             <template slot-scope="pro">
-              <el-switch v-model="pro.row.icon"></el-switch>
+              <el-switch v-model="pro.row.is_category"></el-switch>
             </template>
           </el-table-column>
-          <el-table-column prop="home" label="首页显示" width="80">
+          <el-table-column prop="is_show" label="首页显示" width="80">
             <template slot-scope="pro">
-              <el-switch v-model="pro.row.home"></el-switch>
+              <el-switch v-model="pro.row.is_show"></el-switch>
             </template>
           </el-table-column>
-          <el-table-column prop="all" label="全部产品页面显示" width="180">
+          <el-table-column prop="is_channel" label="全部产品页面显示" width="180">
             <template slot-scope="pro">
-              <el-switch v-model="pro.row.all"></el-switch>
+              <el-switch v-model="pro.row.is_show"></el-switch>
             </template>
           </el-table-column>
-          <el-table-column prop="order" label="排序" sortable width="100">
+          <el-table-column prop="sort_order" label="排序" sortable width="100">
             <template slot-scope="pro">
-              <el-input v-model="pro.row.order"></el-input>
+              <el-input v-model="pro.row.sort_order"></el-input>
             </template>
           </el-table-column>
           <el-table-column label="操作" width="250">
@@ -62,25 +62,24 @@
 }
 </style>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'ProductSetting',
   data() {
     return {
       activeName: 'first',
-      tableData: [],
-      userData: []
+      tableData: []
     }
   },
+  computed: {
+    ...mapState('index', {
+      userData: (state) => state.category
+    })
+  },
   created() {
-    for (let i = 0; i < 20; i++) {
-      this.userData.push({
-        type: i + 1,
-        icon: true,
-        home: true,
-        all: true,
-        order: i + 1
-      })
-    }
+    this.$store.dispatch('index/category').then((res) => {
+      console.log(res)
+    })
     for (let i = 0; i < 20; i++) {
       this.tableData.push({
         id: i + 1,

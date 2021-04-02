@@ -51,3 +51,10 @@ export const goods = data => {
     params: data
   })
 }
+
+export const category = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/category'
+  })
+}

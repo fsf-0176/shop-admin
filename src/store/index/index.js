@@ -4,7 +4,8 @@ const state = {
   userInfo: '',
   users: [],
   trolley: [],
-  goods: []
+  goods: [],
+  category: []
 }
 
 const mutations = {
@@ -20,6 +21,9 @@ const mutations = {
   },
   goods: (state, data) => {
     state.goods = data
+  },
+  category: (state, data) => {
+    state.category = data
   }
 }
 
@@ -55,6 +59,15 @@ const actions = {
     try {
       const res = await api.goods(data)
       commit('goods', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
+  category: async ({ commit }) => {
+    try {
+      const res = await api.category()
+      commit('category', res.data)
       return res
     } catch (error) {
 
