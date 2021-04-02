@@ -35,3 +35,19 @@ export const users = data => {
     url: '/admin/user'
   })
 }
+
+export const trolley = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/shopcart',
+    params: data
+  })
+}
+
+export const goods = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/goods',
+    params: data
+  })
+}

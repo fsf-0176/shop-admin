@@ -14,21 +14,22 @@
         <el-button>清空</el-button>
       </div>
       <el-tab-pane label="全部商品" name="first">
-        <p-list :tableData="tableData" />
+        <p-list :tableData="list" />
       </el-tab-pane>
       <el-tab-pane label="出售中" name="second">
-        <p-list :tableData="tableData" />
+        <p-list :tableData="list" />
       </el-tab-pane>
       <el-tab-pane label="已售完" name="third">
-        <p-list :tableData="tableData" />
+        <p-list :tableData="list" />
       </el-tab-pane>
       <el-tab-pane label="已下架" name="fourth">
-        <p-list :tableData="tableData" />
+        <p-list :tableData="list" />
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import PList from '../../components/PList.vue'
 export default {
   components: { PList },
@@ -39,42 +40,15 @@ export default {
       tableData: []
     }
   },
+  computed: {
+    ...mapState('index', {
+      list: (state) => state.goods
+    })
+  },
   created() {
-    for (let i = 0; i < 20; i++) {
-      this.tableData.push({
-        id: Math.floor(Math.random() * 1000000) + i,
-        picture:
-          'http://yanxuan.nosdn.127.net/149dfa87a7324e184c5526ead81de9ad.png',
-        shopName: '支付测试兼打赏',
-        order: 1,
-        sales: 1132,
-        inventory: 12345,
-        homeShow: Math.floor(Math.random() * 1000) % 2 === 0,
-        putaway: true,
-        child: [
-          {
-            cid: Math.floor(Math.random() * 1000),
-            sku: '12315',
-            expressShort: '懒人椅',
-            mode: '高尚的',
-            cost: 2,
-            retail: 50,
-            weight: 2,
-            cInventory: 210
-          },
-          {
-            cid: Math.floor(Math.random() * 1000),
-            sku: '12315',
-            expressShort: '懒人椅',
-            mode: '高尚的',
-            cost: 2,
-            retail: 50,
-            weight: 2,
-            cInventory: 210
-          }
-        ]
-      })
-    }
+    this.$store.dispatch('index/goods', { page: 1, name: '' }).then((res) => {
+      console.log(res)
+    })
   },
   methods: {
     handleClick(tab, event) {}

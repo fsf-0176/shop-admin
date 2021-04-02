@@ -2,7 +2,9 @@ import * as api from '@/api'
 
 const state = {
   userInfo: '',
-  users: []
+  users: [],
+  trolley: [],
+  goods: []
 }
 
 const mutations = {
@@ -12,6 +14,12 @@ const mutations = {
   users: (state, data) => {
     console.log(data)
     state.users = data
+  },
+  trolley: (state, data) => {
+    state.trolley = data
+  },
+  goods: (state, data) => {
+    state.goods = data
   }
 }
 
@@ -29,6 +37,24 @@ const actions = {
     try {
       const res = await api.users(data)
       commit('users', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
+  trolley: async ({ commit }, data) => {
+    try {
+      const res = await api.trolley(data)
+      commit('trolley', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
+  goods: async ({ commit }, data) => {
+    try {
+      const res = await api.goods(data)
+      commit('goods', res.data)
       return res
     } catch (error) {
 

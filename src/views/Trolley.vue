@@ -7,29 +7,32 @@
     </div>
 
     <el-table
-      :data="tableData"
-      height="calc(80% - 90px)"
-      border
-      style="width: 100%"
-      stripe
+      :data="list"
+
     >
       <el-table-column prop="id" label="ID" width="65"> </el-table-column>
-      <el-table-column prop="uid" label="用户ID" width="65"> </el-table-column>
-      <el-table-column prop="nickname" label="用户昵称"> </el-table-column>
-      <el-table-column prop="pid" label="商品ID" width="65"> </el-table-column>
-      <el-table-column prop="picture" label="图片" width="80">
+      <el-table-column prop="user_id" label="用户ID" width="65"> </el-table-column>
+      <el-table-column prop="nickname" label="用户昵称">
         <template slot-scope="scope">
-          <img :src="scope.row.picture" alt="" />
+          {{scope.row.nickname ? scope.row.nickname : '已删除'}}
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="商品名称"> </el-table-column>
-      <el-table-column prop="model" label="型号"> </el-table-column>
+      <el-table-column prop="product_id" label="商品ID" width="65"> </el-table-column>
+      <el-table-column prop="list_pic_url" label="图片" width="80">
+        <template slot-scope="scope">
+          <img :src="scope.row.list_pic_url" alt="" />
+        </template>
+      </el-table-column>
+      <el-table-column prop="goods_name" label="商品名称"> </el-table-column>
+      <el-table-column prop="goods_specifition_name_value" label="型号"> </el-table-column>
       <el-table-column prop="number" label="数量" width="90"> </el-table-column>
-      <el-table-column prop="money" label="成交价" width="120"> </el-table-column>
-      <el-table-column prop="date" label="加入时间" width="200"> </el-table-column>
+      <el-table-column prop="retail_price" label="成交价" width="120">
+      </el-table-column>
+      <el-table-column prop="add_time" label="加入时间" width="200">
+      </el-table-column>
       <el-table-column prop="delete" label="是否删除" width="100">
         <template slot-scope="scope">
-          {{ scope.row.delete ? '已删除' : '' }}
+          {{ scope.row.is_delete ? '已删' : '否' }}
         </template>
       </el-table-column>
     </el-table>
@@ -45,6 +48,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Trolley',
   data() {
@@ -54,23 +58,12 @@ export default {
     }
   },
   created() {
-    const img =
-      'http://yanxuan.nosdn.127.net/03c73e1f1ce1d2365e83b3230e507030.png'
-    for (let i = 0; i < 20; i++) {
-      this.tableData.push({
-        id: i + 1,
-        uid: i + 1,
-        pid: i + 1,
-        nickname: '名字' + 1,
-        picture: img,
-        name: '房型封闭式凉感条纹宠物窝',
-        model: '1米*1米',
-        number: 1,
-        money: 89.9,
-        date: '2021-03-13 15:29:14',
-        delete: i % 2
-      })
-    }
+    this.$store.dispatch('index/trolley', { page: 1, name: '' })
+  },
+  computed: {
+    ...mapState('index', {
+      list: (statte) => statte.trolley
+    })
   }
 }
 </script>
@@ -89,7 +82,7 @@ export default {
     }
   }
   img {
-      max-width: 100%;
+    max-width: 100%;
     width: 70px;
   }
   .page {
