@@ -24,8 +24,8 @@
     <div class="group">
       <span>首页分类图片或</span>
       <span>
-        <el-radio v-model="radio" label="1">显示</el-radio>
-        <el-radio v-model="radio" label="2">不显示</el-radio>
+        <el-radio v-model="list.index_banner_img" label="1">显示</el-radio>
+        <el-radio v-model="list.index_banner_img" label="2">不显示</el-radio>
       </span>
     </div>
     <div class="group">
@@ -42,7 +42,8 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      radio: '2'
+      radio: '2',
+      data: ''
     }
   },
   computed: {

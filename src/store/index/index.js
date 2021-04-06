@@ -93,6 +93,12 @@ const actions = {
   showSetting: async ({ commit }) => {
     try {
       const res = await api.showSetting()
+      res.data.forEach(item => {
+        item.notice = item.notice + ''
+        item.banner = item.banner + ''
+        item.channel = item.channel + ''
+        item.index_banner_img = item.index_banner_img + ''
+      })
       commit('showSetting', res.data)
       return res
     } catch (error) {
