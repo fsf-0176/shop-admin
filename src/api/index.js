@@ -60,10 +60,16 @@ export const category = data => {
 }
 
 export const order = data => {
-  console.log(data)
   return axios({
     method: 'get',
     url: '/admin/order',
     params: data
+  })
+}
+
+export const showSetting = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/show-setting'
   })
 }

@@ -1,24 +1,24 @@
 <template>
-  <div class="showSetting">
+  <div class="showSetting" v-if="list">
     <div class="group">
       <span>广告</span>
       <span>
-        <el-radio v-model="radio" label="1">显示</el-radio>
-        <el-radio v-model="radio" label="2">不显示</el-radio>
+        <el-radio v-model="list.banner" label="1">显示</el-radio>
+        <el-radio v-model="list.banner" label="2">不显示</el-radio>
       </span>
     </div>
     <div class="group">
       <span>公告</span>
       <span>
-        <el-radio v-model="radio" label="1">显示</el-radio>
-        <el-radio v-model="radio" label="2">不显示</el-radio>
+        <el-radio v-model="list.notice" label="1">显示</el-radio>
+        <el-radio v-model="list.notice" label="2">不显示</el-radio>
       </span>
     </div>
     <div class="group">
       <span>广告下的图标</span>
       <span>
-        <el-radio v-model="radio" label="1">显示</el-radio>
-        <el-radio v-model="radio" label="2">不显示</el-radio>
+        <el-radio v-model="list.channel" label="1">显示</el-radio>
+        <el-radio v-model="list.channel" label="2">不显示</el-radio>
       </span>
     </div>
     <div class="group">
@@ -38,11 +38,20 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      radio: '1'
+      radio: '2'
     }
+  },
+  computed: {
+    ...mapState('index', {
+      list: (state) => state.showSetting[0]
+    })
+  },
+  created() {
+    this.$store.dispatch('index/showSetting')
   }
 }
 </script>
