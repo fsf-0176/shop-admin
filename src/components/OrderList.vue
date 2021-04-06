@@ -1,76 +1,68 @@
 <template>
-  <div class="orderList">
-    <div class="head">
-      <div class="time">
-        <span>交易关闭</span>
-        <span> 下单时间：2021-3-19 23:18:50</span>
-        <span> 订单号：1345165618919819</span>
-      </div>
-      <div class="total">
-        <span>共4件商品</span>
-        <span>当前合计256元（含运费0元）</span>
-      </div>
-    </div>
-    <div class="content">
-      <div class="list">
-        <div class="box">
-          <div class="picture">
-            <img
-              src="http://yanxuan.nosdn.127.net/149dfa87a7324e184c5526ead81de9ad.png"
-            />
-            懒人椅
-          </div>
-          <div class="number">
-            数量:
-            <span>1</span>
-          </div>
+  <div>
+    <div class="orderList" v-for="item of list" :key="item.id">
+      <div class="head">
+        <div class="time">
+          <span>交易关闭</span>
+          <span> 下单时间：2021-3-19 23:18:50</span>
+          <span> 订单号：{{ item.order_sn }}</span>
         </div>
-        <div class="box">
-          <div class="picture">
-            <img
-              src="http://yanxuan.nosdn.127.net/149dfa87a7324e184c5526ead81de9ad.png"
-            />
-            懒人椅
-          </div>
-          <div class="number">
-            数量:
-            <span>1</span>
-          </div>
+        <div class="total">
+          <span>共4件商品</span>
+          <span>当前合计256元（含运费0元）</span>
         </div>
       </div>
-      <div class="user">
-        <div class="pic">
-          <el-avatar
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          ></el-avatar>
-          <span class="name">用户名</span>
+      <div class="content">
+        <div class="list">
+          <div class="box" v-for="goods of item.goodsList" :key="goods.id">
+            <div class="picture">
+              <img :src="goods.list_pic_url" />
+              {{ goods.goods_aka }}
+            </div>
+            <div class="number">
+              数量:
+              <span>{{ goods.number }}</span>
+            </div>
+          </div>
         </div>
-        <p>姓名：大侠</p>
-        <p>手机：13888888888</p>
-      </div>
-      <div class="address">
-        <p>名称 13888888888</p>
-        <small>天津市天津市和平区测试地址</small>
-        <el-input
-          type="textarea"
-          :rows="2"
-          placeholder="请输入内容"
-          v-model="textarea"
-        >
-        </el-input>
-      </div>
-      <div class="detail">
-        <a href="#">查看详情</a>
+        <div class="user">
+          <div class="pic">
+            <el-avatar :src="item.userInfo.avatar"></el-avatar>
+            <span class="name">{{ item.userInfo.nickname }}</span>
+          </div>
+          <p>姓名：大侠</p>
+          <p>手机：{{ item.userInfo.mobile }}</p>
+        </div>
+        <div class="address">
+          <p>{{item.consignee}} {{item.mobile}}</p>
+          <small>{{item.province_name[0].name}}{{item.city_name[0].name}}{{item.district_name[0].name}}</small>
+          <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="请输入内容"
+            v-model="textarea"
+          >
+          </el-input>
+        </div>
+        <div class="detail">
+          <a href="#">查看详情</a>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       textarea: ''
     }
+  },
+  computed: {
+    ...mapState('index', {
+      list: (state) => state.order
+    })
   }
 }
 </script>
@@ -78,10 +70,10 @@ export default {
 .orderList {
   width: 100%;
   border: 1px solid #e7e7e7;
-  margin-top: 15px ;
-  .detail{
+  margin-top: 15px;
+  .detail {
     width: 15%;
-    a{
+    a {
       display: flex;
       align-items: center;
       width: 100%;
@@ -95,10 +87,10 @@ export default {
     padding: 15px;
     border-right: 1px solid #e7e7e7;
     width: 30%;
-    p{
+    p {
       margin: 15px 0;
     }
-    small{
+    small {
       display: block;
       margin-bottom: 15px;
     }

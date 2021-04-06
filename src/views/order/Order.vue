@@ -20,11 +20,8 @@
       </div>
       <el-tab-pane label="待付款" name="first">
         <order-list />
-        <order-list />
-        <order-list />
       </el-tab-pane>
       <el-tab-pane label="待发货" name="second">
-        <order-list />
         <order-list />
       </el-tab-pane>
       <el-tab-pane label="待收货" name="third">
@@ -56,6 +53,7 @@
 }
 </style>
 <script>
+
 import OrderList from '@/components/OrderList'
 export default {
   components: { OrderList },
@@ -64,6 +62,14 @@ export default {
       activeName: 'first',
       input: ''
     }
+  },
+  created() {
+    const data = {
+      status: 300,
+      consignee: '',
+      orderSn: ''
+    }
+    this.$store.dispatch('index/order', data)
   },
   methods: {
     handleClick(tab, event) {

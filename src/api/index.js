@@ -58,3 +58,12 @@ export const category = data => {
     url: '/admin/category'
   })
 }
+
+export const order = data => {
+  console.log(data)
+  return axios({
+    method: 'get',
+    url: '/admin/order',
+    params: data
+  })
+}

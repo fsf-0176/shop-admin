@@ -78,7 +78,6 @@ export default {
       } else {
         // 直接从缓存获取，不需要存store
         this.users = JSON.parse(cache)
-        console.log(this.users)
       }
     }
   }
