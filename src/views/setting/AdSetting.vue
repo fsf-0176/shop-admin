@@ -1,29 +1,29 @@
 <template>
   <div class="adSetting">
-    <el-table :data="tableData" border style="width: 100%">
+    <el-table :data="list" border style="width: 100%">
       <el-table-column prop="id" label="ID" width="65"> </el-table-column>
       <el-table-column prop="picture" label="广告">
         <template slot-scope="scope">
-          <img class="adImg" :src="scope.row.picture" />
+          <img class="adImg" :src="scope.row.image_url" />
         </template>
       </el-table-column>
-      <el-table-column prop="goodsid" label="关联商品" width="100">
+      <el-table-column prop="goods_id" label="关联商品" width="100">
       </el-table-column>
-      <el-table-column prop="endTime" label="结束时间"> </el-table-column>
+      <el-table-column prop="end_time" label="结束时间"> </el-table-column>
       <el-table-column label="排序" sortable width="100">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.order"></el-input>
+          <el-input v-model="scope.row.sort_order"></el-input>
         </template>
       </el-table-column>
-      <el-table-column prop="status" label="状态" width="100">
+      <el-table-column prop="enabled" label="状态" width="100">
         <template slot-scope="scope">
-          {{ scope.row.status ? '启用' : '关闭' }}
+          {{ scope.row.enabled ? '启用' : '关闭' }}
         </template>
       </el-table-column>
       <el-table-column label="开启状态" width="100">
         <template slot-scope="scope">
           <el-switch
-            v-model="scope.row.start"
+            v-model="scope.row.enabled"
             active-color="#13ce66"
             inactive-color="#ff4949"
           >
@@ -37,7 +37,7 @@
         </template>
       </el-table-column>
     </el-table>
-     <div class="page">
+    <div class="page">
       <el-pagination
         :page-sizes="[100, 200, 300, 400]"
         :page-size="100"
@@ -50,30 +50,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       tableData: []
     }
   },
+  computed: {
+    ...mapState('index', {
+      list: (state) => state.ad
+    })
+  },
   created() {
-    for (let i = 0; i < 20; i++) {
-      this.tableData.push({
-        id: i + 1,
-        picture:
-          'http://yanxuan.nosdn.127.net/ed50cbf7fab10b35f676e2451e112130.jpg',
-        goodsid: i + Math.floor(Math.random() * 1024000),
-        endTime: '2030-01-16 15:50:12',
-        order: i,
-        status: 0,
-        start: true
-      })
-    }
+    this.$store.dispatch('index/ad')
   }
 }
 </script>
 <style lang="less">
-.adSetting{
+.adSetting {
   padding: 15px;
   background: white;
   .page {

@@ -1,13 +1,14 @@
 <template>
   <div class="notice">
-    <el-table :data="tableData" border style="width: 100%">
+    <el-table :data="list" border style="width: 100%">
       <el-table-column prop="id" label="ID" width="100"> </el-table-column>
-      <el-table-column prop="nickname" label="会员名称"> </el-table-column>
-      <el-table-column prop="endTime" label="结束时间" width="200"> </el-table-column>
-      <el-table-column prop="ip" label="登录IP" width="200"></el-table-column>
+      <el-table-column prop="username" label="会员名称"> </el-table-column>
+      <el-table-column prop="last_login_time" label="结束时间" width="200">
+      </el-table-column>
+      <el-table-column prop="last_login_ip" label="登录IP" width="200"></el-table-column>
       <el-table-column label="状态" width="200">
         <template slot-scope="scope">
-          <el-button>编辑{{scope.row.id}}</el-button>
+          <el-button @click="scope.row.id" >编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -24,26 +25,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       tableData: []
     }
   },
+  computed: {
+    ...mapState('index', {
+      list: (state) => state.supers
+    })
+  },
   created() {
-    for (let i = 0; i < 20; i++) {
-      this.tableData.push({
-        id: i + 1,
-        nickname: 'Admin',
-        endTime: '2022-12-02 23:59:59',
-        ip: '::ffff:125.120.155.17'
-      })
-    }
+    this.$store.dispatch('index/supers')
   }
 }
 </script>
 <style lang="less">
-.notice{
+.notice {
   padding: 15px;
   background: white;
   .page {

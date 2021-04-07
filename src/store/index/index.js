@@ -7,7 +7,10 @@ const state = {
   goods: [],
   category: [],
   order: [],
-  showSetting: []
+  showSetting: [],
+  ad: [],
+  notice: [],
+  supers: []
 }
 
 const mutations = {
@@ -32,6 +35,15 @@ const mutations = {
   },
   showSetting: (state, data) => {
     state.showSetting = data
+  },
+  ad: (state, data) => {
+    state.ad = data
+  },
+  notice: (state, data) => {
+    state.notice = data
+  },
+  supers: (state, data) => {
+    state.supers = data
   }
 }
 
@@ -100,6 +112,33 @@ const actions = {
         item.index_banner_img = item.index_banner_img + ''
       })
       commit('showSetting', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
+  ad: async ({ commit }) => {
+    try {
+      const res = await api.ad()
+      commit('ad', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
+  notice: async ({ commit }) => {
+    try {
+      const res = await api.notice()
+      commit('notice', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
+  supers: async ({ commit }) => {
+    try {
+      const res = await api.supers()
+      commit('supers', res.data)
       return res
     } catch (error) {
 

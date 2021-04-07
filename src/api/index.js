@@ -73,3 +73,24 @@ export const showSetting = data => {
     url: '/admin/show-setting'
   })
 }
+
+export const ad = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/ad'
+  })
+}
+
+export const notice = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/notice'
+  })
+}
+
+export const supers = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/super'
+  })
+}
