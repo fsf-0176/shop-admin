@@ -1,14 +1,14 @@
 <template>
   <el-col ref="parent" class="menus" :xs="8" :sm="6" :md="4" :lg="3" :xl="3">
     <ul ref="menus">
-      <li class="aaa">
-        <router-link to="/">
+      <li>
+        <router-link active-class="active" exact to="/">
           <i class="el-icon-s-home"></i>
           后台主页
         </router-link>
       </li>
       <li>
-        <router-link to="/order">
+        <router-link active-class="active" to="/order">
           <i class="el-icon-s-home"></i>
           订单列表
         </router-link>
@@ -20,18 +20,18 @@
           <i class="el-icon-arrow-right right active"></i>
         </a>
         <ol>
-          <li><router-link to="/product-list"> 商品列表</router-link></li>
-          <li><router-link to="/product-setting"> 商品设置</router-link></li>
+          <li><router-link active-class="active" to="/product-list"> 商品列表</router-link></li>
+          <li><router-link active-class="active" to="/product-setting"> 商品设置</router-link></li>
         </ol>
       </li>
       <li>
-        <router-link to="/trolley">
+        <router-link active-class="active" to="/trolley">
           <i class="el-icon-s-home"></i>
           购物车
         </router-link>
       </li>
       <li>
-        <router-link to="/user">
+        <router-link active-class="active" to="/user">
           <i class="el-icon-s-home"></i>
           用户列表
         </router-link>
@@ -43,16 +43,16 @@
           <i class="el-icon-arrow-right right"></i>
         </a>
         <ol>
-          <router-link to="/show-setting" tag="li">
+          <router-link active-class="active" to="/show-setting" tag="li">
             <a href="#">显示设置</a>
           </router-link>
-          <router-link to="/ad-setting" tag="li">
+          <router-link active-class="active" to="/ad-setting" tag="li">
             <a href="#">广告设置</a>
           </router-link>
-          <router-link to="/notice-setting" tag="li">
+          <router-link active-class="active" to="/notice-setting" tag="li">
             <a href="#">公告管理</a>
           </router-link>
-          <router-link to="/admin-setting" tag="li">
+          <router-link active-class="active" to="/admin-setting" tag="li">
             <a href="#">管理员</a>
           </router-link>
         </ol>

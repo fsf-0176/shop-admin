@@ -6,25 +6,25 @@
       <el-button type="primary">查询</el-button>
     </div>
 
-    <el-table
-      :data="list"
-
-    >
+    <el-table :data="list.data">
       <el-table-column prop="id" label="ID" width="65"> </el-table-column>
-      <el-table-column prop="user_id" label="用户ID" width="65"> </el-table-column>
+      <el-table-column prop="user_id" label="用户ID" width="65">
+      </el-table-column>
       <el-table-column prop="nickname" label="用户昵称">
         <template slot-scope="scope">
-          {{scope.row.nickname ? scope.row.nickname : '已删除'}}
+          {{ scope.row.nickname ? scope.row.nickname : '已删除' }}
         </template>
       </el-table-column>
-      <el-table-column prop="product_id" label="商品ID" width="65"> </el-table-column>
+      <el-table-column prop="product_id" label="商品ID" width="65">
+      </el-table-column>
       <el-table-column prop="list_pic_url" label="图片" width="80">
         <template slot-scope="scope">
           <img :src="scope.row.list_pic_url" alt="" />
         </template>
       </el-table-column>
       <el-table-column prop="goods_name" label="商品名称"> </el-table-column>
-      <el-table-column prop="goods_specifition_name_value" label="型号"> </el-table-column>
+      <el-table-column prop="goods_specifition_name_value" label="型号">
+      </el-table-column>
       <el-table-column prop="number" label="数量" width="90"> </el-table-column>
       <el-table-column prop="retail_price" label="成交价" width="120">
       </el-table-column>
@@ -38,10 +38,11 @@
     </el-table>
     <div class="page">
       <el-pagination
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
+        :page-size="size"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
+        :total="list.count"
+        @current-change="change"
+        @size-change="sizeChange"
       >
       </el-pagination>
     </div>
@@ -54,11 +55,45 @@ export default {
   data() {
     return {
       tableData: [],
-      input: ''
+      input: '',
+      cur: 1,
+      size: 10
+    }
+  },
+  methods: {
+    pushPath(path, query) {
+      let router = path
+      for (const key in query) {
+        if (router === path) {
+          router += '?' + key + '=' + query[key]
+        } else {
+          router += '&' + key + '=' + query[key]
+        }
+      }
+      return router
+    },
+    change(cur) {
+      this.cur = cur
+      this.$store.dispatch('index/trolley', {
+        page: cur,
+        size: this.size,
+        name: ''
+      })
+    },
+    sizeChange(size) {
+      this.size = size
+      this.$store.dispatch('index/trolley', {
+        page: this.cur,
+        size: size,
+        name: ''
+      })
     }
   },
   created() {
-    this.$store.dispatch('index/trolley', { page: 1, name: '' })
+    console.log(this.$route)
+    const { path, query } = this.$route
+    this.pushPath(path, query)
+    this.$store.dispatch('index/trolley', { name: '' })
   },
   computed: {
     ...mapState('index', {
