@@ -41,6 +41,7 @@
         :page-size="size"
         layout="total, sizes, prev, pager, next, jumper"
         :total="list.count"
+        :current-page="cur"
         @current-change="change"
         @size-change="sizeChange"
       >
@@ -61,17 +62,6 @@ export default {
     }
   },
   methods: {
-    pushPath(path, query) {
-      let router = path
-      for (const key in query) {
-        if (router === path) {
-          router += '?' + key + '=' + query[key]
-        } else {
-          router += '&' + key + '=' + query[key]
-        }
-      }
-      return router
-    },
     change(cur) {
       this.cur = cur
       this.$store.dispatch('index/trolley', {
@@ -79,6 +69,8 @@ export default {
         size: this.size,
         name: ''
       })
+      const { path } = this.$route
+      this.$router.push(`${path}?page=${cur}&size=${this.size}`)
     },
     sizeChange(size) {
       this.size = size
@@ -87,13 +79,20 @@ export default {
         size: size,
         name: ''
       })
+      const { path, query } = this.$route
+      console.log(Math.floor(size, query.page))
+      this.$router.push(`${path}?page=${this.cur}&size=${size}`)
     }
   },
   created() {
-    console.log(this.$route)
-    const { path, query } = this.$route
-    this.pushPath(path, query)
-    this.$store.dispatch('index/trolley', { name: '' })
+    const { page, size } = this.$route.query
+    this.size = +size
+    const data = {
+      page,
+      size,
+      name: ''
+    }
+    this.$store.dispatch('index/trolley', data)
   },
   computed: {
     ...mapState('index', {

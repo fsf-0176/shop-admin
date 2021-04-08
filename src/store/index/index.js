@@ -70,7 +70,6 @@ const actions = {
     try {
       const res = await api.trolley(data)
       commit('trolley', res.data)
-      console.log(data)
       return res
     } catch (error) {
 
