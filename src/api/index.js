@@ -32,7 +32,8 @@ export const login = data => {
 export const users = data => {
   return axios({
     method: 'get',
-    url: '/admin/user'
+    url: '/admin/user',
+    params: data
   })
 }
 

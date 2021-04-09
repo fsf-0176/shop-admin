@@ -32,7 +32,7 @@ export default {
   },
   created() {
     const { page, size } = this.$route.query
-    this.size = +size
+    this.size = +size > 0 ? +size : this.size
     const data = {
       page,
       size,

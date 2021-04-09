@@ -7,8 +7,8 @@
     </div>
 
     <el-table
-      v-if="users"
-      :data="users"
+      v-if="list.data"
+      :data="list.data"
       height="calc(80% - 90px)"
       border
       style="width: 100%"
@@ -23,11 +23,12 @@
       <el-table-column prop="nickname" label="昵称"> </el-table-column>
       <el-table-column prop="gender" label="性别" width="65">
         <template slot-scope="scope">
-          {{scope.row.gender === 1 ? '男' : '女'}}
+          {{ scope.row.gender === 1 ? '男' : '女' }}
         </template>
       </el-table-column>
       <el-table-column prop="register_time" label="加入时间"> </el-table-column>
-      <el-table-column prop="last_login_time" label="最近登录"> </el-table-column>
+      <el-table-column prop="last_login_time" label="最近登录">
+      </el-table-column>
       <el-table-column prop="delete" label="操作">
         <template slot-scope="scope">
           <el-button>编辑 {{ scope.row.id }}</el-button>
@@ -35,51 +36,25 @@
       </el-table-column>
     </el-table>
     <div class="page">
-      <el-pagination
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
-      >
-      </el-pagination>
+      <pagination :list="list" action="index/users" />
     </div>
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
+import Pagination from '../components/Pagination.vue'
 export default {
+  components: { Pagination },
   name: 'Trolley',
   data() {
     return {
-      tableData: [],
-      input: '',
-      users: []
+      input: ''
     }
   },
   computed: {
     ...mapState('index', {
       list: (status) => status.users
     })
-  },
-  methods: {
-    ...mapMutations('index', {
-      setUsers: 'users'
-    })
-  },
-  created() {
-    const { query } = this.$route
-    const cache = localStorage.getItem(`users-p${query.page || 1}`)
-    if (this.users.length === 0) {
-      if (!cache) {
-        this.$store.dispatch('index/users').then((res) => {
-          localStorage.setItem('users-p1', JSON.stringify(res.data))
-          this.users = this.list
-        })
-      } else {
-        // 直接从缓存获取，不需要存store
-        this.users = JSON.parse(cache)
-      }
-    }
   }
 }
 </script>
