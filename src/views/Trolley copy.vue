@@ -37,15 +37,21 @@
       </el-table-column>
     </el-table>
     <div class="page">
-      <pagination :list="list" action="index/trolley" />
+      <el-pagination
+        :page-size="size"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="list.count"
+        :current-page="cur"
+        @current-change="change"
+        @size-change="sizeChange"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
-import Pagination from '../components/Pagination.vue'
 export default {
-  components: { Pagination },
   name: 'Trolley',
   data() {
     return {
@@ -55,9 +61,42 @@ export default {
       size: 10
     }
   },
+  methods: {
+    change(cur) {
+      this.cur = cur
+      this.$store.dispatch('index/trolley', {
+        page: cur,
+        size: this.size,
+        name: ''
+      })
+      const { path } = this.$route
+      this.$router.push(`${path}?page=${cur}&size=${this.size}`)
+    },
+    sizeChange(size) {
+      this.size = size
+      this.$store.dispatch('index/trolley', {
+        page: this.cur,
+        size: size,
+        name: ''
+      })
+      const { path, query } = this.$route
+      console.log(Math.floor(size, query.page))
+      this.$router.push(`${path}?page=${this.cur}&size=${size}`)
+    }
+  },
+  created() {
+    const { page, size } = this.$route.query
+    this.size = +size
+    const data = {
+      page,
+      size,
+      name: ''
+    }
+    this.$store.dispatch('index/trolley', data)
+  },
   computed: {
     ...mapState('index', {
-      list: statte => statte.trolley
+      list: (statte) => statte.trolley
     })
   }
 }

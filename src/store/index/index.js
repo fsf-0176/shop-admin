@@ -3,7 +3,7 @@ import * as api from '@/api'
 const state = {
   userInfo: '',
   users: [],
-  trolley: [],
+  trolley: {},
   goods: [],
   category: [],
   order: [],
