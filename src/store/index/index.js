@@ -8,9 +8,9 @@ const state = {
   category: [],
   order: [],
   showSetting: [],
-  ad: [],
-  notice: [],
-  supers: []
+  ad: {},
+  notice: {},
+  supers: {}
 }
 
 const mutations = {

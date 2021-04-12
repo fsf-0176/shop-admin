@@ -1,6 +1,6 @@
 <template>
   <div class="adSetting">
-    <el-table :data="list" border style="width: 100%">
+    <el-table :data="list.data" border style="width: 100%">
       <el-table-column prop="id" label="ID" width="65"> </el-table-column>
       <el-table-column prop="picture" label="广告">
         <template slot-scope="scope">
@@ -38,32 +38,20 @@
       </el-table-column>
     </el-table>
     <div class="page">
-      <el-pagination
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
-      >
-      </el-pagination>
+     <pagination :list="list" action="index/ad" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Pagination from '../../components/Pagination.vue'
 export default {
-  data() {
-    return {
-      tableData: []
-    }
-  },
+  components: { Pagination },
   computed: {
     ...mapState('index', {
       list: (state) => state.ad
     })
-  },
-  created() {
-    this.$store.dispatch('index/ad')
   }
 }
 </script>

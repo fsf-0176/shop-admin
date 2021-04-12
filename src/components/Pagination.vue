@@ -6,6 +6,7 @@
     :current-page="cur"
     @current-change="change"
     @size-change="sizeChange"
+    v-if="list.count / size > 1"
   >
   </el-pagination>
 </template>
