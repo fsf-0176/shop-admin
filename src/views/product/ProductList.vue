@@ -13,16 +13,16 @@
         <el-button type="primary">查询</el-button>
         <el-button>清空</el-button>
       </div>
-      <el-tab-pane label="全部商品" name="first">
+      <el-tab-pane label="全部商品" name="goods">
         <p-list :tableData="list.data" />
       </el-tab-pane>
-      <el-tab-pane label="出售中" name="second">
+      <el-tab-pane label="出售中" name="onsale">
         <p-list :tableData="list.data" />
       </el-tab-pane>
-      <el-tab-pane label="已售完" name="third">
+      <el-tab-pane label="已售完" name="out">
         <p-list :tableData="list.data" />
       </el-tab-pane>
-      <el-tab-pane label="已下架" name="fourth">
+      <el-tab-pane label="已下架" name="drop">
         <p-list :tableData="list.data" />
       </el-tab-pane>
     </el-tabs>
@@ -37,7 +37,7 @@ export default {
   components: { PList, Pagination },
   data() {
     return {
-      activeName: 'first',
+      activeName: 'goods',
       input: '',
       tableData: []
     }
@@ -47,11 +47,14 @@ export default {
       list: (state) => state.goods
     })
   },
-  created() {
-
-  },
+  created() {},
   methods: {
-    handleClick(tab, event) {}
+    handleClick(tab) {
+      const { name } = tab
+      this.$store.dispatch(`index/${name}`).then((res) => {
+        console.log(res)
+      })
+    }
   }
 }
 </script>

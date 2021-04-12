@@ -84,6 +84,15 @@ const actions = {
 
     }
   },
+  drop: async ({ commit }, data) => {
+    try {
+      const res = await api.drop(data)
+      commit('goods', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
   category: async ({ commit }) => {
     try {
       const res = await api.category()

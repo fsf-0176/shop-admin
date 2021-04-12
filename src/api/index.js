@@ -17,7 +17,8 @@ axios.interceptors.response.use(
     return response
   },
   error => {
-    alert(error)
+    // alert(error)
+    console.log(error)
   }
 )
 
@@ -49,6 +50,14 @@ export const goods = data => {
   return axios({
     method: 'get',
     url: '/admin/goods',
+    params: data
+  })
+}
+
+export const drop = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/drop',
     params: data
   })
 }
