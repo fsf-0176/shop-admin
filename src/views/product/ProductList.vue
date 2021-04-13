@@ -26,7 +26,7 @@
         <p-list :tableData="list.data" />
       </el-tab-pane>
     </el-tabs>
-    <pagination :list="list" action="index/goods" />
+    <pagination :list="list" :action="'index/' + type" />
   </div>
 </template>
 <script>
@@ -37,9 +37,9 @@ export default {
   components: { PList, Pagination },
   data() {
     return {
-      activeName: 'goods',
+      activeName: '',
       input: '',
-      tableData: []
+      type: ''
     }
   },
   computed: {
@@ -47,13 +47,22 @@ export default {
       list: (state) => state.goods
     })
   },
-  created() {},
+  created() {
+    this.type = this.$route.query.type
+    this.activeName = this.$route.query.type
+  },
+  watch: {
+    $route(val) {
+      const { query } = val
+      this.type = query.type
+    }
+  },
   methods: {
     handleClick(tab) {
       const { name } = tab
       this.$store.dispatch(`index/${name}`).then((res) => {
         const { path } = this.$route
-        this.$router.push(`${path}?type=${name}`)
+        this.type !== name && this.$router.push(`${path}?type=${name}`)
       })
     }
   }
