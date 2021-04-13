@@ -93,6 +93,24 @@ const actions = {
 
     }
   },
+  onsale: async ({ commit }, data) => {
+    try {
+      const res = await api.onsale(data)
+      commit('goods', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
+  out: async ({ commit }, data) => {
+    try {
+      const res = await api.out(data)
+      commit('goods', res.data)
+      return res
+    } catch (error) {
+
+    }
+  },
   category: async ({ commit }) => {
     try {
       const res = await api.category()

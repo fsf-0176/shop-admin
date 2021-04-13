@@ -52,7 +52,8 @@ export default {
     handleClick(tab) {
       const { name } = tab
       this.$store.dispatch(`index/${name}`).then((res) => {
-        console.log(res)
+        const { path } = this.$route
+        this.$router.push(`${path}?type=${name}`)
       })
     }
   }

@@ -62,6 +62,22 @@ export const drop = data => {
   })
 }
 
+export const onsale = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/onsale',
+    params: data
+  })
+}
+
+export const out = data => {
+  return axios({
+    method: 'get',
+    url: '/admin/out',
+    params: data
+  })
+}
+
 export const category = data => {
   return axios({
     method: 'get',
