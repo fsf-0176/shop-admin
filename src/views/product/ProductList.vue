@@ -48,8 +48,8 @@ export default {
     })
   },
   created() {
-    this.type = this.$route.query.type
-    this.activeName = this.$route.query.type
+    this.type = this.$route.query.type || 'goods'
+    this.activeName = this.$route.query.type || 'goods'
   },
   watch: {
     $route(val) {
@@ -59,7 +59,8 @@ export default {
   },
   methods: {
     handleClick(tab) {
-      const { name } = tab
+      const { name = 'goods' } = tab
+      console.log(`index/${name}`)
       this.$store.dispatch(`index/${name}`).then((res) => {
         const { path } = this.$route
         this.type !== name && this.$router.push(`${path}?type=${name}`)

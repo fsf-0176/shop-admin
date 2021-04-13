@@ -44,13 +44,15 @@ export default {
   methods: {
     change(cur) {
       this.cur = cur
-      const { path } = this.$route
+      const { path, query } = this.$route
       this.$store.dispatch(this.action, {
         page: cur,
         size: this.size,
         name: ''
       })
-      this.$router.push(`${path}?page=${cur}&size=${this.size}`)
+      this.$router.push(
+        `${path}?type=${query.type || 'goods'}&page=${cur}&size=${this.size}`
+      )
     },
     sizeChange(size) {
       this.size = size
