@@ -33,13 +33,6 @@
       <el-tab-pane label="已关闭" name="fifth" status="102,103">
         <order-list />
       </el-tab-pane>
-      <el-tab-pane
-        label="全部订单"
-        name="sixth"
-        status="101,102,103,300,301,401,801"
-      >
-        <order-list />
-      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -78,7 +71,9 @@ export default {
     handleClick(tab, event) {
       this.status = tab.$attrs.status
       const data = {
-        status: tab.$attrs.status
+        status: tab.$attrs.status,
+        consignee: '',
+        orderSn: ''
       }
       this.$store.dispatch('index/order', data)
     }
