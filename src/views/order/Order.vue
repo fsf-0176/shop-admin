@@ -18,22 +18,26 @@
         </el-input>
         <el-button type="primary">查询</el-button>
       </div>
-      <el-tab-pane label="待付款" name="first">
+      <el-tab-pane label="待付款" name="first" status="101,801">
         <order-list />
       </el-tab-pane>
-      <el-tab-pane label="待发货" name="second">
+      <el-tab-pane label="待发货" name="second" status="300">
         <order-list />
       </el-tab-pane>
-      <el-tab-pane label="待收货" name="third">
+      <el-tab-pane label="待收货" name="third" status="301">
         <order-list />
       </el-tab-pane>
-      <el-tab-pane label="已收货" name="fourth">
+      <el-tab-pane label="已收货" name="fourth" status="401">
         <order-list />
       </el-tab-pane>
-      <el-tab-pane label="已关闭" name="fifth">
+      <el-tab-pane label="已关闭" name="fifth" status="102,103">
         <order-list />
       </el-tab-pane>
-      <el-tab-pane label="全部订单" name="sixth">
+      <el-tab-pane
+        label="全部订单"
+        name="sixth"
+        status="101,102,103,300,301,401,801"
+      >
         <order-list />
       </el-tab-pane>
     </el-tabs>
@@ -53,7 +57,6 @@
 }
 </style>
 <script>
-
 import OrderList from '@/components/OrderList'
 export default {
   components: { OrderList },
@@ -65,7 +68,7 @@ export default {
   },
   created() {
     const data = {
-      status: 300,
+      status: '101,801',
       consignee: '',
       orderSn: ''
     }
@@ -73,7 +76,11 @@ export default {
   },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event)
+      this.status = tab.$attrs.status
+      const data = {
+        status: tab.$attrs.status
+      }
+      this.$store.dispatch('index/order', data)
     }
   }
 }
