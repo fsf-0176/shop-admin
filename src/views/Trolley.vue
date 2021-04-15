@@ -57,10 +57,8 @@ export default {
       list: (statte) => statte.trolley
     })
   },
-  methods: {
-    // query() {
-    //   this.$store.dispatch('index/trolley',)
-    // }
+  created() {
+    this.input = this.$route.query.name || ''
   }
 }
 </script>

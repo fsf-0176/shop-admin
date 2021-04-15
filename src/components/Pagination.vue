@@ -8,7 +8,6 @@
     @size-change="sizeChange"
     v-if="list.count / size > 1"
   >
-    {{ query }}
   </el-pagination>
 </template>
 <script>
@@ -33,37 +32,40 @@ export default {
   data() {
     return {
       size: 10,
-      cur: 1
+      cur: 1,
+      name: ''
     }
   },
   created() {
-    const { page, size } = this.$route.query
+    const { page, size, name = '' } = this.$route.query
     this.size = +size > 0 ? +size : this.size
+    this.name = name
+    this.cur = +page
     const data = {
       page,
       size,
-      name: ''
+      name
     }
     this.$store.dispatch(this.action, data)
   },
-  computed: {
-    query() {
-      if (this.name !== this.search) {
+  watch: {
+    search(val) {
+      console.log(val, this.name)
+      if (this.name !== val) {
         console.log(123)
+        this.name = val
         this.$store.dispatch(this.action, {
           page: this.cur,
           size: this.size,
-          name: this.search
+          name: this.name
         })
         const { path, query } = this.$route
         this.$router.push(
           `${path}?${query.type ? 'type=' + query.type + '&' : ''}page=${
             this.cur
-          }&size=${this.size}${this.search ? '&name=' + this.search : ''}`
+          }&size=${this.size}${this.name ? '&name=' + this.name : ''}`
         )
-        this.name = this.search
       }
-      return this.search
     }
   },
   methods: {
@@ -73,14 +75,12 @@ export default {
       this.$store.dispatch(this.action, {
         page: cur,
         size: this.size,
-        name: this.query
+        name: this.name
       })
       this.$router.push(
         `${path}?${
           query.type ? 'type=' + query.type + '&' : ''
-        }page=${cur}&size=${this.size}${
-          this.query ? '&name=' + this.query : ''
-        }`
+        }page=${cur}&size=${this.size}${this.name ? '&name=' + this.name : ''}`
       )
     },
     sizeChange(size) {
@@ -88,13 +88,13 @@ export default {
       this.$store.dispatch(this.action, {
         page: this.cur,
         size: size,
-        name: this.query
+        name: this.name
       })
       const { path, query } = this.$route
       this.$router.push(
         `${path}?${query.type ? 'type=' + query.type + '&' : ''}page=${
           this.cur
-        }&size=${size}${this.query ? '&name=' + this.query : ''}`
+        }&size=${size}${this.name ? '&name=' + this.name : ''}`
       )
     }
   }
