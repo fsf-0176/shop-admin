@@ -37,7 +37,7 @@
       </el-table-column>
     </el-table>
     <div class="page">
-      <pagination :list="list" action="index/trolley" />
+      <pagination :list="list" :search="input" action="index/trolley" />
     </div>
   </div>
 </template>
@@ -49,16 +49,18 @@ export default {
   name: 'Trolley',
   data() {
     return {
-      tableData: [],
-      input: '',
-      cur: 1,
-      size: 10
+      input: ''
     }
   },
   computed: {
     ...mapState('index', {
-      list: statte => statte.trolley
+      list: (statte) => statte.trolley
     })
+  },
+  methods: {
+    // query() {
+    //   this.$store.dispatch('index/trolley',)
+    // }
   }
 }
 </script>
