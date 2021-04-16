@@ -3,16 +3,20 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <div class="search">
         订单号
-        <el-input placeholder="请输入订单号" class="" v-model="input" clearable>
+        <el-input
+          placeholder="请输入订单号"
+          class=""
+          @change="order"
+          v-model="orderSn"
+          clearable
+        >
         </el-input>
         收货人
-        <el-input placeholder="请输入收货人" class="" v-model="input" clearable>
-        </el-input>
-        快递号
         <el-input
-          placeholder="请输入快递单号"
+          placeholder="请输入收货人"
           class=""
-          v-model="input"
+          @change="consigne"
+          v-model="consignee"
           clearable
         >
         </el-input>
@@ -56,7 +60,8 @@ export default {
   data() {
     return {
       activeName: 'first',
-      input: ''
+      orderSn: '',
+      consignee: ''
     }
   },
   created() {
@@ -68,6 +73,22 @@ export default {
     this.$store.dispatch('index/order', data)
   },
   methods: {
+    consigne() {
+      const data = {
+        consignee: this.consignee,
+        orderSn: this.orderSn,
+        status: this.status
+      }
+      this.$store.dispatch('index/order', data)
+    },
+    order() {
+      const data = {
+        consignee: this.consignee,
+        orderSn: this.orderSn,
+        status: this.status
+      }
+      this.$store.dispatch('index/order', data)
+    },
     handleClick(tab, event) {
       this.status = tab.$attrs.status
       const data = {
