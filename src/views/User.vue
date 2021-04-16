@@ -36,7 +36,7 @@
       </el-table-column>
     </el-table>
     <div class="page">
-      <pagination :list="list" action="index/users" />
+      <pagination :list="list" :search="input" action="index/users" />
     </div>
   </div>
 </template>
@@ -55,6 +55,9 @@ export default {
     ...mapState('index', {
       list: (status) => status.users
     })
+  },
+  created() {
+    this.input = this.$route.query.name || ''
   }
 }
 </script>

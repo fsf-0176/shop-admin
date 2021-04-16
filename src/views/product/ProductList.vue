@@ -8,7 +8,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <div class="search">
         商品名称
-        <el-input placeholder="请输入内容" class="" v-model="input" clearable>
+        <el-input placeholder="请输入内容" v-model="input" clearable>
         </el-input>
         <el-button type="primary">查询</el-button>
         <el-button>清空</el-button>
@@ -26,7 +26,7 @@
         <p-list :tableData="list.data" />
       </el-tab-pane>
     </el-tabs>
-    <pagination :list="list" :action="'index/' + type" />
+    <pagination :list="list" :search="input" :action="'index/' + type" />
   </div>
 </template>
 <script>
@@ -50,6 +50,7 @@ export default {
   created() {
     this.type = this.$route.query.type || 'goods'
     this.activeName = this.$route.query.type || 'goods'
+    this.input = this.$route.query.name || ''
   },
   watch: {
     $route(val) {

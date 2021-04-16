@@ -52,7 +52,6 @@ export default {
     search(val) {
       console.log(val, this.name)
       if (this.name !== val) {
-        console.log(123)
         this.name = val
         this.$store.dispatch(this.action, {
           page: this.cur,
@@ -60,10 +59,9 @@ export default {
           name: this.name
         })
         const { path, query } = this.$route
+        this.cur = 1
         this.$router.push(
-          `${path}?${query.type ? 'type=' + query.type + '&' : ''}page=${
-            this.cur
-          }&size=${this.size}${this.name ? '&name=' + this.name : ''}`
+          `${path}?${query.type ? 'type=' + query.type + '&' : ''}page=1&size=${this.size}${this.name ? '&name=' + this.name : ''}`
         )
       }
     }
