@@ -10,9 +10,9 @@
               <el-switch v-model="pro.row.is_category"></el-switch>
             </template>
           </el-table-column>
-          <el-table-column prop="is_show" label="首页显示" width="80">
+          <el-table-column prop="show_index" label="首页显示" width="80">
             <template slot-scope="pro">
-              <el-switch v-model="pro.row.is_show"></el-switch>
+              <el-switch v-model="pro.row.show_index"></el-switch>
             </template>
           </el-table-column>
           <el-table-column prop="is_channel" label="全部产品页面显示" width="180">
@@ -80,13 +80,6 @@ export default {
     this.$store.dispatch('index/category').then((res) => {
       console.log(res)
     })
-    for (let i = 0; i < 20; i++) {
-      this.tableData.push({
-        id: i + 1,
-        modeName: '规格',
-        order: 1
-      })
-    }
   },
   methods: {
     handleClick(tab, event) {

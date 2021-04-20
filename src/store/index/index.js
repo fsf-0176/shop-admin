@@ -28,6 +28,11 @@ const mutations = {
     state.goods = data
   },
   category: (state, data) => {
+    data.forEach(item => {
+      item.is_category = item.is_category === 1
+      item.is_show = item.is_show === 1
+      item.show_index = item.show_index === 1
+    })
     state.category = data
   },
   order: (state, data) => {
