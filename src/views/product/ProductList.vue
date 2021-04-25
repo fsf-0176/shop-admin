@@ -1,10 +1,10 @@
 <template>
   <div class="productList">
-    <div class="order">
+    <!-- <div class="order">
       <el-button type="primary" plain>按销量排序</el-button>
       <el-button type="primary" plain>按售价排序</el-button>
       <el-button type="primary" plain>按库存排序</el-button>
-    </div>
+    </div> -->
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <div class="search">
         商品名称

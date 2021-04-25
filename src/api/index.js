@@ -120,3 +120,11 @@ export const supers = data => {
     url: '/admin/super'
   })
 }
+
+export const setGoodsStatus = data => {
+  return axios({
+    method: 'post',
+    url: '/admin/setGoodsStatus',
+    data
+  })
+}

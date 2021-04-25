@@ -9,29 +9,17 @@
             label="商品SKU"
             width="150"
           ></el-table-column>
-          <el-table-column
-            prop="goods_name"
-            label="快递单上的简称"
-            width="220"
-          >
-           <template slot-scope="p">
-             {{p.row.goods_name?p.row.goods_name:'暂无'}}
-           </template>
-          </el-table-column>
-          <el-table-column
-            prop="value"
-            label="型号/规格"
-            width="150"
-          >
+          <el-table-column prop="goods_name" label="快递单上的简称" width="220">
             <template slot-scope="p">
-             {{p.row.value?p.row.value:'暂无'}}
-           </template>
+              {{ p.row.goods_name ? p.row.goods_name : '暂无' }}
+            </template>
           </el-table-column>
-          <el-table-column
-            prop="cost"
-            label="成本（元）"
-            width="110"
-          >
+          <el-table-column prop="value" label="型号/规格" width="150">
+            <template slot-scope="p">
+              {{ p.row.value ? p.row.value : '暂无' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="cost" label="成本（元）" width="110">
           </el-table-column>
           <el-table-column
             prop="retail_price"
@@ -74,12 +62,20 @@
     </el-table-column>
     <el-table-column label="首页显示" width="100">
       <template slot-scope="props">
-        <el-switch v-model="props.row.is_index"> </el-switch>
+        <el-switch
+          @change="show(props.row.id, 'is_index', $event)"
+          v-model="props.row.is_index"
+        >
+        </el-switch>
       </template>
     </el-table-column>
     <el-table-column label="上架" width="100">
       <template slot-scope="props">
-        <el-switch v-model="props.row.is_on_sale"> </el-switch>
+        <el-switch
+          @change="show(props.row.id, 'is_on_sale', $event)"
+          v-model="props.row.is_on_sale"
+        >
+        </el-switch>
       </template>
     </el-table-column>
     <el-table-column label="操作" width="180">
@@ -97,6 +93,16 @@ export default {
     tableData: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    show(id, type, $event) {
+      this.$store
+        .dispatch('index/setGoodsStatus', { id, type, status: $event })
+        .then((res) => {
+          console.log(res)
+          console.log(id, type, $event)
+        })
     }
   }
 }

@@ -175,6 +175,11 @@ const actions = {
     } catch (error) {
 
     }
+  },
+  setGoodsStatus: async ({ commit }, data) => {
+    const res = await api.setGoodsStatus(data)
+    commit('setGoodsStatus', res.data)
+    return res
   }
 }
 
