@@ -17,7 +17,6 @@ axios.interceptors.response.use(
     return response
   },
   error => {
-    // alert(error)
     console.log(error)
   }
 )
@@ -125,6 +124,14 @@ export const setGoodsStatus = data => {
   return axios({
     method: 'post',
     url: '/admin/setGoodsStatus',
+    data
+  })
+}
+
+export const delGoods = data => {
+  return axios({
+    method: 'post',
+    url: '/admin/delGoods',
     data
   })
 }

@@ -79,9 +79,11 @@
       </template>
     </el-table-column>
     <el-table-column label="操作" width="180">
-      <template>
+      <template slot-scope="props">
         <el-button>编辑</el-button>
-        <el-button type="danger" plain>删除</el-button>
+        <el-button @click="del(props.row.id)" type="danger" plain
+          >删除</el-button
+        >
       </template>
     </el-table-column>
   </el-table>
@@ -103,6 +105,11 @@ export default {
           console.log(res)
           console.log(id, type, $event)
         })
+    },
+    del(id) {
+      this.$store.dispatch('index/delGoods', { id }).then((res) => {
+        console.log(res)
+      })
     }
   }
 }

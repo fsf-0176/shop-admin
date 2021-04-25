@@ -49,6 +49,17 @@ const mutations = {
   },
   supers: (state, data) => {
     state.supers = data
+  },
+  delGoods: (state, { data }) => {
+    console.log(data)
+    if (data.affectedRows > 0) {
+      const res = {}
+      res.data = state.goods.data.filter(item => item.id !== data.id)
+      res.count = state.goods.count - 1
+      state.goods = res
+      console.log(2)
+      console.log(data, res)
+    }
   }
 }
 
@@ -179,6 +190,11 @@ const actions = {
   setGoodsStatus: async ({ commit }, data) => {
     const res = await api.setGoodsStatus(data)
     commit('setGoodsStatus', res.data)
+    return res
+  },
+  delGoods: async ({ commit }, data) => {
+    const res = await api.delGoods(data)
+    commit('delGoods', res.data)
     return res
   }
 }
