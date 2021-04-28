@@ -44,10 +44,7 @@ export default {
   },
   computed: {
     ...mapState('index', {
-      list: (state) => {
-        console.log(state.goods)
-        return state.goods
-      }
+      list: (state) => state.goods
     })
   },
   created() {

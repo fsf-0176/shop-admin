@@ -53,7 +53,10 @@
     <el-table-column label="商品名称" prop="name"> </el-table-column>
     <el-table-column label="排序" prop="sort_order" sortable width="80">
       <template slot-scope="props">
-        <el-input v-model="props.row.sort_order"></el-input>
+        <el-input
+          @change="order(props.row.id, $event)"
+          v-model="props.row.sort_order"
+        ></el-input>
       </template>
     </el-table-column>
     <el-table-column label="销量" sortable prop="sell_volume" width="100">
@@ -91,6 +94,11 @@
 <script>
 export default {
   name: 'PList',
+  data() {
+    return {
+      orderVal: ''
+    }
+  },
   props: {
     tableData: {
       type: Array,
@@ -98,6 +106,10 @@ export default {
     }
   },
   methods: {
+    order(id, $event) {
+      const order = $event.replace(/^\.+|[^\d.]/g, '')
+      this.$store.dispatch('index/setOrder', { id, order })
+    },
     show(id, type, $event) {
       this.$store
         .dispatch('index/setGoodsStatus', { id, type, status: $event })

@@ -135,3 +135,11 @@ export const delGoods = data => {
     data
   })
 }
+
+export const setOrder = data => {
+  return axios({
+    method: 'post',
+    url: '/admin/setOrder',
+    data
+  })
+}
