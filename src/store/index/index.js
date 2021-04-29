@@ -56,8 +56,6 @@ const mutations = {
       res.data = state.goods.data.filter(item => item.id !== data.id)
       res.count = state.goods.count - 1
       state.goods = res
-      console.log(2)
-      console.log(data, res)
     }
   },
   setOrder: (state, { data }) => {
@@ -67,6 +65,15 @@ const mutations = {
           item.order = data.order
         }
       })
+    }
+  },
+  delNoticeSetting: (state, { data }) => {
+    console.log(data)
+    if (data.affectedRows > 0) {
+      const res = {}
+      res.data = state.notice.data.filter(item => item.id !== data.id)
+      res.count = state.notice.count - 1
+      state.notice = res
     }
   }
 }
@@ -208,6 +215,11 @@ const actions = {
   setOrder: async ({ commit }, data) => {
     const res = await api.setOrder(data)
     commit('setOrder', res.data)
+    return res
+  },
+  delNoticeSetting: async ({ commit }, data) => {
+    const res = await api.delNoticeSetting(data)
+    commit('delNoticeSetting', res.data)
     return res
   }
 }

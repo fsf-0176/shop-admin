@@ -13,12 +13,12 @@
       <el-table-column label="状态" width="200">
         <template slot-scope="scope">
           <el-button @click="scope.row.id">编辑</el-button>
-          <el-button type="danger">删除</el-button>
+          <el-button type="danger" @click="del(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="page">
-     <pagination :list="list" action="index/notice" />
+      <pagination :list="list" action="index/notice" />
     </div>
   </div>
 </template>
@@ -32,6 +32,11 @@ export default {
     ...mapState('index', {
       list: (state) => state.notice
     })
+  },
+  methods: {
+    del(id) {
+      this.$store.dispatch('index/delNoticeSetting', { id })
+    }
   }
 }
 </script>

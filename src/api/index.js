@@ -143,3 +143,11 @@ export const setOrder = data => {
     data
   })
 }
+
+export const delNoticeSetting = data => {
+  return axios({
+    method: 'post',
+    url: '/admin/delNoticeSetting',
+    data
+  })
+}
